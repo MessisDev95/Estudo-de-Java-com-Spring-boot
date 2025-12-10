@@ -11,7 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-@Data
+@Data //Lombok annotation to generate getters and setters
 @Entity(name = "tb_users")
 public class UserModel {
     @Id
@@ -21,12 +21,14 @@ public class UserModel {
     @Column(unique = true, nullable = false)
     private String username;
     private String name;
-    private int password;
+    private String password;
     
     @CreationTimestamp
     private LocalDateTime createdAt;
-
     
+    // to receive password as String that i define in UserController/HashedPassword
+    
+
     /*public void setUsername(String username) {
         this.username = username;
     }
