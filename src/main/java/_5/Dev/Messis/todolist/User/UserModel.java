@@ -25,6 +25,8 @@ public class UserModel {
     
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    
     
     // to receive password as String that i define in UserController/HashedPassword
     
