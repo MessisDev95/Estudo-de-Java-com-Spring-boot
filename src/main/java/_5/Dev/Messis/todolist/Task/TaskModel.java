@@ -28,7 +28,8 @@ public class TaskModel {
     @CreationTimestamp
     private LocalDateTime createdAt;
     private LocalDateTime endedAt;
-
-    @Column(nullable = false)
+    
+    // validar id do usuário
+    //@Column(nullable = false) não é mais necessário com o filter
     private UUID id_User;
 }
