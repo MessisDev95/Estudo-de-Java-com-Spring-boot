@@ -30,6 +30,6 @@ public class TaskModel {
     private LocalDateTime endedAt;
     
     // validar id do usuário
-    //@Column(nullable = false) não é mais necessário com o filter
+    //@Column(nullable = false)
     private UUID id_User;
 }
