@@ -2,11 +2,14 @@ package _5.Dev.Messis.todolist.Task;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,12 +25,12 @@ public class TaskController {
     @Autowired // Dependency injection of the task repository
     private ITaskRepository taskRepository;
     
-    @RequestMapping("/") // Maps HTTP requests to /tasks/ to this method
+    @PostMapping("/") // Maps HTTP requests to /tasks/ to this method
     public ResponseEntity create(@RequestBody TaskModel taskModel, HttpServletRequest request) {
         System.out.println(request.getAttribute("idUser"));
 
         var idUser = request.getAttribute("idUser");
-        taskModel.setId_User((UUID) idUser);
+        taskModel.setUserId((UUID) idUser);
 
         var currentDate = LocalDateTime.now();
         if (currentDate.isAfter(taskModel.getCreatedAt()) || currentDate.isAfter(taskModel.getEndedAt())) {
@@ -40,9 +43,14 @@ public class TaskController {
 
         }
     
-        
-        // faltou um pedacinho
         var task = this.taskRepository.save(taskModel);
         return ResponseEntity.status(HttpStatus.OK).body(task);
+    }
+    
+    @GetMapping("/") // Maps HTTP GET requests to /tasks/ to this method
+    public List<TaskModel> list(HttpServletRequest request) {
+        var idUser = request.getAttribute("idUser");
+        var tasks = this.taskRepository.findByUserId((UUID) idUser);
+        return tasks;
     }
 }

@@ -24,12 +24,12 @@ public class TaskModel {
 
     private String description;
     private String priority;
-
+    
     @CreationTimestamp
     private LocalDateTime createdAt;
     private LocalDateTime endedAt;
     
-    // validar id do usuário
+
     //@Column(nullable = false)
-    private UUID id_User;
+    private UUID userId;
 }
