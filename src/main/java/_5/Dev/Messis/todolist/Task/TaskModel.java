@@ -29,7 +29,14 @@ public class TaskModel {
     private LocalDateTime createdAt;
     private LocalDateTime endedAt;
     
-
     //@Column(nullable = false)
     private UUID userId;
+
+    public void setTittle(String tittle) throws Exception {
+        if (tittle.length() > 120) {
+            throw new Exception("O título não pode ter mais de 120 caracteres.");
+        }
+        
+        this.tittle = tittle;
+    }
 }
